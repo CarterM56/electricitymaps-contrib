@@ -151,7 +151,7 @@ def fetch_live_production(
     production_breakdowns = ProductionBreakdownList(logger)
 
     # Process storage data first
-    # storage_by_hour = parse_storage_data(session)
+    storage_by_hour = parse_storage_data(session)
 
     # Process generation data
     for day in gen_data_json:
@@ -173,7 +173,7 @@ def fetch_live_production(
 
         for hour_dt, modes in hourly_data.items():
             production = ProductionMix()
-            # storage = StorageMix()
+            storage = StorageMix()
 
             # Add generation data
             for mode, values in modes.items():
@@ -185,19 +185,19 @@ def fetch_live_production(
                     )
 
             # Add storage data if available for this hour
-            # if hour_dt in storage_by_hour:
-            #     storage_values = storage_by_hour[hour_dt]
-            #     if storage_values:
-            #         storage.add_value(
-            #             "battery", sum(storage_values) / len(storage_values)
-            #         )
+            if hour_dt in storage_by_hour:
+                storage_values = storage_by_hour[hour_dt]
+                if storage_values:
+                    storage.add_value(
+                        "battery", sum(storage_values) / len(storage_values)
+                    )
 
             production_breakdowns.append(
                 zoneKey=ZoneKey(zone_key),
                 datetime=hour_dt,
                 source=SOURCE,
                 production=production,
-                # storage=storage,
+                storage=storage,
             )
 
     return production_breakdowns

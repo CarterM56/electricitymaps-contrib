@@ -17,15 +17,24 @@ HOST_PARAMETER = "host=https://www.ercot.com"
 BASE_PATH_TO_MOCK = Path("parsers/test/mocks/US_ERCOT")
 
 # def test_snapshot_fetch_production(adapter, session, snapshot):
-#     # Read the gzip-compressed response
-#     data = BASE_PATH_TO_MOCK / "fuel-mix.gz"
-#
+#     # Mock generation (fuel mix)
+#     gen_data = BASE_PATH_TO_MOCK / "fuel-mix.gz"
 #     adapter.register_uri(
 #         GET,
 #         re.compile(
 #             r"https://us-ca-proxy-jfnx5klx2a-uw\.a\.run\.app/api/1/services/read/dashboards/fuel-mix\.json\?host=https://www\.ercot\.com"
 #         ),
-#         content=data.read_bytes(),
+#         content=gen_data.read_bytes(),
+#     )
+#
+#     # Mock storage (energy storage resources)
+#     storage_data = BASE_PATH_TO_MOCK / "energy-storage-resources.gz"
+#     adapter.register_uri(
+#         GET,
+#         re.compile(
+#             r"https://us-ca-proxy-jfnx5klx2a-uw\.a\.run\.app/api/1/services/read/dashboards/energy-storage-resources\.json\?host=https://www\.ercot\.com"
+#         ),
+#         content=storage_data.read_bytes(),
 #     )
 #
 #     result = fetch_production(
