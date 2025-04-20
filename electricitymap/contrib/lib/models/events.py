@@ -99,6 +99,7 @@ class ProductionMix(Mix):
     solar: float | None = None
     unknown: float | None = None
     wind: float | None = None
+    battery: float | None = None
 
     def __init__(self, **data: Any):
         """

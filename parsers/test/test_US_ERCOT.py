@@ -9,12 +9,33 @@ from parsers.US_ERCOT import (
     ReportTypeID,
     fetch_consumption_forecast,
     fetch_wind_solar_forecasts,
+    fetch_production
 )
 
 US_PROXY = "https://us-ca-proxy-jfnx5klx2a-uw.a.run.app"
 HOST_PARAMETER = "host=https://www.ercot.com"
 BASE_PATH_TO_MOCK = Path("parsers/test/mocks/US_ERCOT")
 
+# def test_snapshot_fetch_production(adapter, session, snapshot):
+#     # Read the gzip-compressed response
+#     data = BASE_PATH_TO_MOCK / "fuel-mix.gz"
+#
+#     adapter.register_uri(
+#         GET,
+#         re.compile(
+#             r"https://us-ca-proxy-jfnx5klx2a-uw\.a\.run\.app/api/1/services/read/dashboards/fuel-mix\.json\?host=https://www\.ercot\.com"
+#         ),
+#         content=data.read_bytes(),
+#     )
+#
+#     result = fetch_production(
+#         zone_key=ZoneKey("US-TEX-ERCO"),
+#         session=session,
+#     )
+#
+#     assert snapshot == result
+    #Couldn't get test working, but used test to see inside the production list
+    #Would be good idea to get this test outputting useful info, but it was good to see what didn't work and why.
 
 def test_snapshot_fetch_consumption_forecast(adapter, session, snapshot):
     # Mock load forecast request

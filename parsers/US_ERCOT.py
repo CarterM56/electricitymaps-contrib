@@ -169,8 +169,7 @@ def fetch_live_production(
 
             for mode, data in date_dict[date].items():
                 production_source = GENERATION_MAPPING[mode]
-                if production_source != "battery":  # Skip battery from generation data
-                    hourly_data[hour_dt][production_source].append(data["gen"])
+                hourly_data[hour_dt][production_source].append(data["gen"])
 
         for hour_dt, modes in hourly_data.items():
             production = ProductionMix()

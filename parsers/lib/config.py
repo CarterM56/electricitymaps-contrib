@@ -51,6 +51,7 @@ class ProductionModes(BaseModeEnum):
     OIL = "oil"
     SOLAR = "solar"
     WIND = "wind"
+    BATTERY = "battery"
     UNKNOWN = "unknown"
 
 
@@ -60,6 +61,19 @@ class StorageModes(BaseModeEnum):
     # TODO: When we migrate to StringEnum, we should use the `auto()` method
     BATTERY = "battery"
     HYDRO = "hydro"
+
+    #Not sure why the rest of these energy storage modes are not listed but delete above and uncomment below to use all
+    # BIOMASS = "biomass"
+    # COAL = "coal"
+    # GAS = "gas"
+    # GEOTHERMAL = "geothermal"
+    # HYDRO = "hydro"
+    # NUCLEAR = "nuclear"
+    # OIL = "oil"
+    # SOLAR = "solar"
+    # WIND = "wind"
+    # BATTERY = "battery"
+    # UNKNOWN = "unknown"
 
 
 def refetch_frequency(frequency: timedelta):
