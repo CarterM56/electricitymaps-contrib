@@ -182,17 +182,7 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     tsconfigPaths(),
-    react(
-      mode === 'production'
-        ? {}
-        : {
-            devTarget: 'es2022',
-            plugins: [
-              ['@swc-jotai/react-refresh', {}],
-              ['@swc-jotai/debug-label', {}],
-            ],
-          }
-    ),
+    react(),
     ...(mode === 'test'
       ? []
       : [
