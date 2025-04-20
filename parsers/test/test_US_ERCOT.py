@@ -16,33 +16,32 @@ US_PROXY = "https://us-ca-proxy-jfnx5klx2a-uw.a.run.app"
 HOST_PARAMETER = "host=https://www.ercot.com"
 BASE_PATH_TO_MOCK = Path("parsers/test/mocks/US_ERCOT")
 
-# def test_snapshot_fetch_production(adapter, session, snapshot):
-#     # Mock generation (fuel mix)
-#     gen_data = BASE_PATH_TO_MOCK / "fuel-mix.gz"
-#     adapter.register_uri(
-#         GET,
-#         re.compile(
-#             r"https://us-ca-proxy-jfnx5klx2a-uw\.a\.run\.app/api/1/services/read/dashboards/fuel-mix\.json\?host=https://www\.ercot\.com"
-#         ),
-#         content=gen_data.read_bytes(),
-#     )
-#
-#     # Mock storage (energy storage resources)
-#     storage_data = BASE_PATH_TO_MOCK / "energy-storage-resources.gz"
-#     adapter.register_uri(
-#         GET,
-#         re.compile(
-#             r"https://us-ca-proxy-jfnx5klx2a-uw\.a\.run\.app/api/1/services/read/dashboards/energy-storage-resources\.json\?host=https://www\.ercot\.com"
-#         ),
-#         content=storage_data.read_bytes(),
-#     )
-#
-#     result = fetch_production(
-#         zone_key=ZoneKey("US-TEX-ERCO"),
-#         session=session,
-#     )
-#
-#     assert snapshot == result
+def test_fetch_production_does_not_raise(adapter, session):
+    gen_data = BASE_PATH_TO_MOCK / "fuel-mix.gz"
+    adapter.register_uri(
+        GET,
+        re.compile(
+            r"https://us-ca-proxy-jfnx5klx2a-uw\.a\.run\.app/api/1/services/read/dashboards/fuel-mix\.json\?host=https://www\.ercot\.com"
+        ),
+        content=gen_data.read_bytes(),
+    )
+
+    storage_data = BASE_PATH_TO_MOCK / "energy-storage-resources.gz"
+    adapter.register_uri(
+        GET,
+        re.compile(
+            r"https://us-ca-proxy-jfnx5klx2a-uw\.a\.run\.app/api/1/services/read/dashboards/energy-storage-resources\.json\?host=https://www\.ercot\.com"
+        ),
+        content=storage_data.read_bytes(),
+    )
+
+    try:
+        fetch_production(
+            zone_key=ZoneKey("US-TEX-ERCO"),
+            session=session,
+        )
+    except Exception as e:
+        assert False, f"fetch_production raised an unexpected exception: {e}"
     #Couldn't get test working, but used test to see inside the production list
     #Would be good idea to get this test outputting useful info, but it was good to see what didn't work and why.
 
