@@ -189,7 +189,7 @@ def fetch_live_production(
                 storage_values = storage_by_hour[hour_dt]
                 if storage_values:
                     storage.add_value(
-                        "battery", sum(storage_values) / len(storage_values)
+                        "battery", (sum(storage_values) / len(storage_values) * -1)
                     )
 
             production_breakdowns.append(

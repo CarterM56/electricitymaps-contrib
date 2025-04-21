@@ -42,8 +42,7 @@ def test_fetch_production_does_not_raise(adapter, session):
         )
     except Exception as e:
         assert False, f"fetch_production raised an unexpected exception: {e}"
-    #Couldn't get test working, but used test to see inside the production list
-    #Would be good idea to get this test outputting useful info, but it was good to see what didn't work and why.
+    #Test will run silently unless an error is raised. No fail = pass in this scenario
 
 def test_snapshot_fetch_consumption_forecast(adapter, session, snapshot):
     # Mock load forecast request
